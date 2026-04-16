@@ -1,0 +1,20 @@
+<h1>SAN FLOLENCE'S SHOP</h1>
+<div id="posts"></div>
+
+<script>
+fetch('/posts')
+.then(res => res.json())
+.then(data => {
+  let html = '';
+  data.forEach(p => {
+    html += `<h3>ID: ${p.id} - ${p.title}</h3>`;
+    if(p.type=="image"){
+      html += `<img src="/uploads/${p.filename}" width="200"><p>${p.description}</p>`;
+    }
+    if(p.type=="video"){
+      html += `<video width="300" controls><source src="/uploads/${p.filename}"></video><p>${p.description}</p>`;
+    }
+  });
+  document.getElementById("posts").innerHTML = html;
+});
+</script>
